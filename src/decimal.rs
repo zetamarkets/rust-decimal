@@ -96,7 +96,7 @@ pub struct UnpackedDecimal {
 /// The finite set of values of type `Decimal` are of the form m / 10<sup>e</sup>,
 /// where m is an integer such that -2<sup>96</sup> < m < 2<sup>96</sup>, and e is an integer
 /// between 0 and 28 inclusive.
-#[derive(Clone, Copy)]
+#[derive(Clone, Copy, AnchorSerialize, AnchorDeserialize)]
 #[cfg_attr(feature = "diesel", derive(FromSqlRow, AsExpression), sql_type = "Numeric")]
 #[cfg_attr(feature = "c-repr", repr(C))]
 pub struct Decimal {
