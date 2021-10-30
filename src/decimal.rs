@@ -1509,6 +1509,21 @@ impl Decimal {
             crate::str::parse_str_radix_n(str, radix)
         }
     }
+
+    /// Convert Decimal to fixed point `i128`
+    /// 
+    /// let pi = dec!("3.14").to_fixed(6).unwrap();
+    /// assert_eq!(pi, 3_140000_i128);
+    pub fn to_fixed(&self, scale: u32) -> Option<i128> {
+        if self.scale() == 0 {
+            self.to_i128()
+        } else {
+            let mut x = self.clone();
+            x.rescale(scale);
+            let mantissa = x.mantissa();
+            Some(mantissa)
+        }
+    }
 }
 
 impl Default for Decimal {
