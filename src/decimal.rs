@@ -105,12 +105,12 @@ pub struct Decimal {
     // Bits 16-23: Contains "e", a value between 0-28 that indicates the scale
     // Bits 24-30: unused
     // Bit 31: the sign of the Decimal value, 0 meaning positive and 1 meaning negative.
-    flags: u32,
+    pub flags: u32,
     // The lo, mid, hi, and flags fields contain the representation of the
     // Decimal value as a 96-bit integer.
-    hi: u32,
-    lo: u32,
-    mid: u32,
+    pub hi: u32,
+    pub lo: u32,
+    pub mid: u32,
 }
 
 /// `RoundingStrategy` represents the different rounding strategies that can be used by
