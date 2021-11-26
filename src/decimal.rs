@@ -1511,12 +1511,12 @@ impl Decimal {
     }
 
     /// Convert Decimal to fixed point `i128`
-    /// 
+    ///
     /// let pi = dec!("3.14").to_fixed(6).unwrap();
     /// assert_eq!(pi, 3_140000_i128);
     pub fn to_fixed(&self, scale: u32) -> Option<i128> {
         if self.scale() == 0 {
-            self.to_i128()
+            self.to_i128().unwrap().checked_mul(10i128.pow(scale))
         } else {
             let mut x = self.clone();
             x.rescale(scale);
