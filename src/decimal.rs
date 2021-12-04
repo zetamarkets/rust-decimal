@@ -23,6 +23,8 @@ use num_traits::{
     CheckedAdd, CheckedDiv, CheckedMul, CheckedRem, CheckedSub, FromPrimitive, Num, One, Signed, ToPrimitive, Zero,
 };
 
+use bytemuck::Pod;
+
 /// The smallest value that can be represented by this decimal type.
 const MIN: Decimal = Decimal {
     flags: 2_147_483_648,
@@ -112,6 +114,12 @@ pub struct Decimal {
     pub lo: u32,
     pub mid: u32,
 }
+
+#[cfg(target_endian = "little")]
+unsafe impl Pod for Decimal {}
+
+#[cfg(target_endian = "little")]
+unsafe impl Zeroable for Decimal {}
 
 /// `RoundingStrategy` represents the different rounding strategies that can be used by
 /// `round_dp_with_strategy`.

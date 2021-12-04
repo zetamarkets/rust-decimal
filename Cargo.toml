@@ -32,6 +32,7 @@ serde = { default-features = false, optional = true, version = "1.0" }
 serde_json = { default-features = false, optional = true, version = "1.0" }
 tokio-postgres = { default-features = false, optional = true, version = "0.7" }
 anchor-lang = "0.17.0"
+bytemuck = { version = "1.4.0" }
 
 [dev-dependencies]
 bincode = "1.3"

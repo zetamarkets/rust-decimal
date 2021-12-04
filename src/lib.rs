@@ -160,7 +160,6 @@
 //!
 //! Please refer to the [Build document](BUILD.md) for more information on building and testing Rust Decimal.
 //!
-#![forbid(unsafe_code)]
 #![cfg_attr(not(feature = "std"), no_std)]
 extern crate alloc;
 
