@@ -23,7 +23,7 @@ use num_traits::{
     CheckedAdd, CheckedDiv, CheckedMul, CheckedRem, CheckedSub, FromPrimitive, Num, One, Signed, ToPrimitive, Zero,
 };
 
-use bytemuck::Pod;
+use bytemuck::{Pod, Zeroable};
 
 /// The smallest value that can be represented by this decimal type.
 const MIN: Decimal = Decimal {
