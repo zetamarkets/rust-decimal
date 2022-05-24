@@ -14,10 +14,11 @@ test = false
 arbitrary = { features = ["derive"], version = "1.0" }
 libfuzzer-sys = "0.4"
 rust_decimal = { features = ["maths", "rust-fuzz"], path = ".." }
+serde_json = { default-features = false, features = ["alloc"], version = "1.0" }
 
 [package]
 authors = ["Automatically generated"]
-edition = "2018"
+edition = "2021"
 name = "rust-decimal-fuzz"
 publish = false
 version = "0.0.0"

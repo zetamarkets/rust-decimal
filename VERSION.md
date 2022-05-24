@@ -1,5 +1,75 @@
 # Version History
 
+## 1.23.1
+
+Fixes issue with `no_std` compatability introduced in `1.23.0` ([#501](https://github.com/paupino/rust-decimal/pull/501)).
+
+## 1.23.0
+
+* Add `BorschSchema` support for the `borsh` feature ([#498](https://github.com/paupino/rust-decimal/pull/498)).
+* Implement `TryFrom` for Decimal primitive types ([#493](https://github.com/paupino/rust-decimal/pull/493)).
+* Fix `to_i64` to support `i64::MIN` ([#496](https://github.com/paupino/rust-decimal/pull/496)).
+* Implement `Inv` from `num_traits` ([#495](https://github.com/paupino/rust-decimal/pull/495)).
+* Some minor housekeeping tasks ([#487](https://github.com/paupino/rust-decimal/pull/487), [#490](https://github.com/paupino/rust-decimal/pull/490)).
+
+Thank you [@turion](https://github.com/turion), [@arthurprs](https://github.com/arthurprs) and [@jnitard](https://github.com/jnitard) for your help with this release.
+
+
+## 1.22.0
+
+* Add support for `borsh` serialization/deserialization ([#478](https://github.com/paupino/rust-decimal/pull/478)).
+* Fixes an issue with `serde-with-str` where it wasn't behaving the same as `serde-str` when using `bincode` ([#484](https://github.com/paupino/rust-decimal/pull/484)).
+* Added `must_use` to `is_sign_negative` and `unpack` ([#482](https://github.com/paupino/rust-decimal/pull/482)).
+* Minor documentation fixes.
+
+Thank you [@jkbpvsc](https://github.com/jkbpvsc) for your help in this release.
+
+## 1.21.0
+
+* Saturating op variants have been added: `saturating_add`, `saturating_sub` and `saturating_mul` ([#464](https://github.com/paupino/rust-decimal/pull/464))
+* Fixes issue with `log10` values `0 < x < 1` ([#469](https://github.com/paupino/rust-decimal/pull/469))
+* Various documentation fixes/cleanup.
+
+Thank you [@c410-f3r](https://github.com/c410-f3r) for your work in this release!
+
+## 1.20.0
+
+* Additional fuzz testing for deserialize ([#452](https://github.com/paupino/rust-decimal/pull/452))
+* Documentation fix for rounding strategy ([#458](https://github.com/paupino/rust-decimal/pull/458))
+* `from_str` is now over 4x faster, utilizing const generics and TCO ([#456](https://github.com/paupino/rust-decimal/pull/456))
+* Fixed `from_str` issue with rounding issues when too many digits in source string. ([#453](https://github.com/paupino/rust-decimal/issues/453))
+* New `serde-with` functionality for greater configurability when using `serde` ([#459](https://github.com/paupino/rust-decimal/pull/459))
+* Various maintenance tasks ([#460](https://github.com/paupino/rust-decimal/pull/460))
+
+This is truly a collaborative release and has some significant contributions from the community. A huge thank
+you to everyone involved:
+
+* [@chris-cantor](https://github.com/chris-cantor)
+* [@TradingTomatillo](https://github.com/TradingTomatillo)
+* [@c410-f3r](https://github.com/c410-f3r)
+* [@ShigotoMitame](https://github.com/ShigotoMitame)
+* [@luke-brown](https://github.com/luke-brown)
+
+## 1.19.0
+
+This is a minor dot release and contains library updates ([#334](https://github.com/paupino/rust-decimal/pull/334)) and 
+expanded scope in `prelude` to include `num_traits::Signed` ([#450](https://github.com/paupino/rust-decimal/pull/450)). 
+While subtle, it also expands the way towards some bigger improvements including variable precision.
+
+Of a larger note, the minimum Rust compiler version has been updated so we can start utilizing various compiler features
+(such as const generics). The miminum compiler version is now `1.51.0`.
+
+Thank you to [@c410-f3r](https://github.com/c410-f3r) and [@jracollins](https://github.com/jracollins) for your contributions
+to this release.
+
+## 1.18.0
+
+* Fixes integer handling for `to_f64` when scale is set to `0`. [#443](https://github.com/paupino/rust-decimal/pull/443). 
+  Thank you [@anatols](https://github.com/anatols) for creating this fix.
+* Add support for Rocket Forms using the feature flag `rocket-traits`. [#445](https://github.com/paupino/rust-decimal/pull/445).
+  Thank you [@Misterio77](https://github.com/Misterio77) for putting this together.
+* Add Diesel MySQL support, enabled by the feature flag `db-diesel-mysq`. [#446](https://github.com/paupino/rust-decimal/pull/446).
+
 ## 1.17.0
 
 * Fixes panic when display precision was specified greater than 30. [#428](https://github.com/paupino/rust-decimal/issues/428). 

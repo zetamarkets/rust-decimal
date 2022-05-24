@@ -12,8 +12,6 @@ Developing Rust Decimal
 
 ## Setup
 
-**Minimum Rust Version:** `1.46.0`
-
 Rust Decimal leverages [cargo make](https://github.com/sagiegurari/cargo-make) to ensure a consistent build/test/release
 approach. This also handles installing any additional dependencies in order to execute various commands, making getting set 
 up and going relatively straight forward and easy.
@@ -103,7 +101,7 @@ run by using `makers fuzz`.
 In order to ensure that Rust Decimal runs quickly, a number of benchmarks have been created and can be executed using
 `makers bench`. 
 
-When adding new benchmarking configurations please ensure that you add a corresponding `Makefile.toml` task to capture the
+When adding new benchmarking configurations, please ensure that you add a corresponding `Makefile.toml` task to capture the
 updated configuration.
 
 ## Code Coverage
