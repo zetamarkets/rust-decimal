@@ -2,7 +2,7 @@ mod macros;
 
 use core::{cmp::Ordering::*, str::FromStr};
 use num_traits::{Inv, Signed, ToPrimitive};
-use rust_decimal::{Decimal, Error, RoundingStrategy, prelude::ToFixed};
+use rust_decimal::{prelude::ToFixed, Decimal, Error, RoundingStrategy};
 
 #[test]
 #[cfg(feature = "c-repr")]
@@ -3165,7 +3165,10 @@ fn it_can_parse_different_fixed() {
     ];
 
     for &(value, scale, expected) in tests {
-        assert_eq!(expected.to_string(), Decimal::from_str(value).unwrap().to_fixed(scale).unwrap().to_string());
+        assert_eq!(
+            expected.to_string(),
+            Decimal::from_str(value).unwrap().to_fixed(scale).unwrap().to_string()
+        );
     }
 }
 
