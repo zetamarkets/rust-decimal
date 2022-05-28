@@ -3,7 +3,7 @@ use crate::{
     ops::array::{div_by_u32, is_all_zero, mul_by_u32},
     Decimal,
 };
-use core::{convert::TryInto, fmt};
+use core::fmt;
 use std::error;
 
 #[derive(Debug, Clone)]
@@ -139,8 +139,8 @@ impl Decimal {
     }
 }
 
-#[cfg(feature = "diesel")]
-mod diesel {
+#[cfg(feature = "db-diesel-postgres")]
+mod diesel_postgres {
     use super::*;
     use ::diesel::{
         deserialize::{self, FromSql},
@@ -149,7 +149,6 @@ mod diesel {
         serialize::{self, Output, ToSql},
         sql_types::Numeric,
     };
-    use core::convert::{TryFrom, TryInto};
     use std::io::Write;
 
     impl<'a> TryFrom<&'a PgNumeric> for Decimal {
@@ -205,8 +204,8 @@ mod diesel {
     }
 
     impl From<Decimal> for PgNumeric {
-        fn from(bigdecimal: Decimal) -> Self {
-            (&bigdecimal).into()
+        fn from(decimal: Decimal) -> Self {
+            (&decimal).into()
         }
     }
 
@@ -224,7 +223,7 @@ mod diesel {
     }
 
     #[cfg(test)]
-    mod pg_tests {
+    mod tests {
         use super::*;
         use core::str::FromStr;
 
@@ -349,7 +348,6 @@ mod diesel {
         }
 
         #[test]
-        #[cfg(feature = "unstable")]
         fn decimal_to_pg_numeric_retains_sign() {
             let decimal = Decimal::from_str("123.456").unwrap();
             let expected = PgNumeric::Positive {
@@ -460,8 +458,8 @@ mod diesel {
     }
 }
 
-#[cfg(feature = "postgres")]
-mod postgres {
+#[cfg(any(feature = "db-postgres", feature = "db-tokio-postgres"))]
+mod _postgres {
     use super::*;
     use ::postgres::types::{to_sql_checked, FromSql, IsNull, ToSql, Type};
     use byteorder::{BigEndian, ReadBytesExt};

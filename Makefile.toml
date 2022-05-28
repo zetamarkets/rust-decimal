@@ -116,15 +116,15 @@ dependencies = [
     "test-maths",
     "test-misc",
     "test-db",
+    "test-rocket-traits",
     "test-serde",
     "test-macros"
 ]
 
 [tasks.test-db]
 dependencies = [
-    "test-db-postgres",
-    "test-db-tokio-postgres",
-    "test-db-diesel-postgres"
+    "test-db-mysql-all",
+    "test-db-postgres-all"
 ]
 
 [tasks.test-serde]
@@ -133,7 +133,10 @@ dependencies = [
     "test-serde-str",
     "test-serde-str-float",
     "test-serde-arbitrary-precision",
-    "test-serde-arbitrary-precision-float"
+    "test-serde-arbitrary-precision-float",
+    "test-serde-with-arbitrary-precision",
+    "test-serde-with-float",
+    "test-serde-with-str",
 ]
 
 [tasks.test-macros]
@@ -171,8 +174,30 @@ command = "cargo"
 args = ["test", "--workspace", "--no-default-features", "--features=maths-nopanic", "maths", "--", "--skip", "generated"]
 
 [tasks.test-misc]
+dependencies = [
+    "test-rust-fuzz",
+    "test-borsh"
+]
+
+[tasks.test-rust-fuzz]
 command = "cargo"
 args = ["test", "--workspace", "--no-default-features", "--features=rust-fuzz", "rust_fuzz", "--", "--skip", "generated"]
+
+[tasks.test-db-mysql-all]
+dependencies = [
+    "test-db-diesel-mysql"
+]
+
+[tasks.test-db-diesel-mysql]
+command = "cargo"
+args = ["test", "--workspace", "--tests", "--features=db-diesel-mysql", "db", "--", "--skip", "generated"]
+
+[tasks.test-db-postgres-all]
+dependencies = [
+    "test-db-postgres",
+    "test-db-tokio-postgres",
+    "test-db-diesel-postgres"
+]
 
 [tasks.test-db-postgres]
 command = "cargo"
@@ -185,6 +210,10 @@ args = ["test", "--workspace", "--tests", "--features=db-tokio-postgres", "db", 
 [tasks.test-db-diesel-postgres]
 command = "cargo"
 args = ["test", "--workspace", "--tests", "--features=db-diesel-postgres", "db", "--", "--skip", "generated"]
+
+[tasks.test-rocket-traits]
+command = "cargo"
+args = ["test", "--workspace", "--features=rocket-traits"]
 
 [tasks.test-serde-float]
 command = "cargo"
@@ -205,3 +234,20 @@ args = ["test", "--workspace", "--tests", "--features=serde-arbitrary-precision"
 [tasks.test-serde-arbitrary-precision-float]
 command = "cargo"
 args = ["test", "--workspace", "--tests", "--features=serde-arbitrary-precision,serde-float", "serde", "--", "--skip", "generated"]
+
+[tasks.test-serde-with-arbitrary-precision]
+command = "cargo"
+args = ["test", "--workspace", "--tests", "--features=serde-with-arbitrary-precision", "serde", "--", "--skip", "generated"]
+
+[tasks.test-serde-with-float]
+command = "cargo"
+args = ["test", "--workspace", "--tests", "--features=serde-with-float", "serde", "--", "--skip", "generated"]
+
+[tasks.test-serde-with-str]
+command = "cargo"
+args = ["test", "--workspace", "--tests", "--features=serde-with-str", "serde", "--", "--skip", "generated"]
+
+[tasks.test-borsh]
+command = "cargo"
+args = ["test", "--workspace", "--features=borsh"]
+
